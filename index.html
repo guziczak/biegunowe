@@ -3,77 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krzywe biegunowe</title>
+    <title>Gabinet Stomatologiczny Karolina K</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-        }
-        canvas {
-            border: 1px solid #ccc;
-            margin: 10px;
-            background-color: #fff;
-        }
-        h1 {
-            width: 100%;
-            text-align: center;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
             color: #333;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile, .services, .gallery, .contact {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .profile img, .gallery img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            margin: 10px;
+        }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            display: inline-block;
+        }
+        ul li {
+            background: #e8f5e9;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        .contact {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .contact a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>Piękne krzywe biegunowe</h1>
-
-    <canvas id="curve1" width="300" height="300"></canvas>
-    <canvas id="curve2" width="300" height="300"></canvas>
-    <canvas id="curve3" width="300" height="300"></canvas>
-    <canvas id="curve4" width="300" height="300"></canvas>
-
-    <script>
-        function drawPolarCurve(canvasId, equation, color) {
-            const canvas = document.getElementById(canvasId);
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width;
-            const height = canvas.height;
-            const centerX = width / 2;
-            const centerY = height / 2;
-            const scale = 100;
-
-            ctx.clearRect(0, 0, width, height);
-            ctx.beginPath();
-
-            for (let theta = 0; theta < 2 * Math.PI; theta += 0.01) {
-                const r = equation(theta);
-                const x = centerX + r * Math.cos(theta) * scale;
-                const y = centerY - r * Math.sin(theta) * scale;
-
-                if (theta === 0) {
-                    ctx.moveTo(x, y);
-                } else {
-                    ctx.lineTo(x, y);
-                }
-            }
-
-            ctx.strokeStyle = color;
-            ctx.lineWidth = 2;
-            ctx.stroke();
-        }
-
-        // Równania krzywych biegunowych
-        const roseCurve = (theta) => Math.sin(4 * theta);
-        const spiralCurve = (theta) => theta;
-        const cardioidCurve = (theta) => 1 + Math.cos(theta);
-        const lemniscateCurve = (theta) => Math.sqrt(Math.cos(2 * theta));
-
-        // Rysowanie krzywych
-        drawPolarCurve('curve1', roseCurve, '#FF5733');
-        drawPolarCurve('curve2', spiralCurve, '#33FF57');
-        drawPolarCurve('curve3', cardioidCurve, '#3357FF');
-        drawPolarCurve('curve4', lemniscateCurve, '#FF33A1');
-    </script>
+    <header>Gabinet Stomatologiczny Karolina K</header>
+    
+    <div class="container">
+        <section class="profile">
+            <h2>O mnie</h2>
+            <img src="placeholder-profile.jpg" alt="Zdjęcie Karoliny K">
+            <p>Jestem doświadczonym stomatologiem, specjalizującym się w nowoczesnej stomatologii estetycznej i leczeniu zachowawczym. 
+            Mój gabinet to miejsce, gdzie komfort i profesjonalizm idą w parze. 
+            Dzięki zaawansowanym technologiom i indywidualnemu podejściu do pacjenta, dbam o zdrowy i piękny uśmiech.</p>
+        </section>
+        
+        <section class="services">
+            <h2>Nasze usługi</h2>
+            <ul>
+                <li>Stomatologia zachowawcza – kompleksowe leczenie zębów</li>
+                <li>Profilaktyka stomatologiczna – profesjonalne czyszczenie i fluoryzacja</li>
+                <li>Wybielanie zębów – nowoczesne metody wybielania</li>
+                <li>Implantologia – trwałe i estetyczne uzupełnienia</li>
+                <li>Protetyka – korony, mosty i protezy na najwyższym poziomie</li>
+                <li>Ortodoncja – aparaty stałe i ruchome dla dzieci i dorosłych</li>
+                <li>Stomatologia dziecięca – bezbolesne leczenie najmłodszych</li>
+                <li>Chirurgia stomatologiczna – ekstrakcje i inne zabiegi</li>
+            </ul>
+        </section>
+        
+        <section class="gallery">
+            <h2>Nasz gabinet</h2>
+            <img src="placeholder-gabinet1.jpg" alt="Zdjęcie gabinetu 1">
+            <img src="placeholder-gabinet2.jpg" alt="Zdjęcie gabinetu 2">
+            <img src="placeholder-gabinet3.jpg" alt="Zdjęcie gabinetu 3">
+        </section>
+        
+        <section class="contact">
+            <h2>Kontakt</h2>
+            <p>📍 Adres: ul. Zdrowia 10, 50-500 Wrocław</p>
+            <p>📞 Telefon: <a href="tel:+48606899868">606 899 868</a></p>
+            <p>📧 Email: <a href="mailto:kara6@tlen.pl">kara6@tlen.pl</a></p>
+            <p>🕒 Godziny otwarcia: Pon-Pt: 9:00 - 18:00 | Sob: 9:00 - 14:00</p>
+        </section>
+    </div>
 </body>
 </html>

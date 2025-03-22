@@ -1,113 +1,600 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabinet Stomatologiczny Karolina K</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f8f8;
-            color: #333;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        .profile, .services, .gallery, .contact {
-            margin-bottom: 40px;
-            text-align: center;
-        }
-        .profile img, .gallery img {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
-            border-radius: 10px;
-            margin: 10px;
-        }
-        .gallery {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-            display: inline-block;
-        }
-        ul li {
-            background: #e8f5e9;
-            margin: 10px;
-            padding: 15px;
-            border-radius: 5px;
-            font-size: 18px;
-        }
-        .contact {
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .contact a {
-            color: #4CAF50;
-            text-decoration: none;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Gra: Patologiczne Starcie Zębów - Diagnoza i Leczenie</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    
+    h1, h2 {
+      color: #2a6496;
+      text-align: center;
+    }
+    
+    .game-area {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .patient-info {
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    
+    .tooth-diagram {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    
+    .tooth-diagram img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+    }
+    
+    .options-area {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .option {
+      padding: 10px;
+      background-color: #e6f2ff;
+      border: 1px solid #b3d9ff;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .option:hover {
+      background-color: #cce6ff;
+    }
+    
+    .selected {
+      background-color: #b3d9ff;
+      font-weight: bold;
+    }
+    
+    .button {
+      display: block;
+      width: 200px;
+      margin: 20px auto;
+      padding: 10px;
+      background-color: #4d94ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .button:hover {
+      background-color: #3385ff;
+    }
+    
+    .feedback {
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 5px;
+      display: none;
+    }
+    
+    .correct {
+      background-color: #dff0d8;
+      border: 1px solid #d6e9c6;
+      color: #3c763d;
+    }
+    
+    .incorrect {
+      background-color: #f2dede;
+      border: 1px solid #ebccd1;
+      color: #a94442;
+    }
+    
+    .progress-area {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .score {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .game-over {
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .highlights {
+      color: #2a6496;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <header>Gabinet Stomatologiczny Karolina K</header>
+  <div class="container">
+    <h1>Patologiczne Starcie Zębów</h1>
+    <h2>Symulator Diagnostyki i Leczenia</h2>
     
-    <div class="container">
-        <section class="profile">
-            <h2>O mnie</h2>
-            <img src="profile.jpg" alt="Zdjęcie Karoliny K">
-            <p>Jestem doświadczonym stomatologiem, specjalizującym się w nowoczesnej stomatologii estetycznej i leczeniu zachowawczym. 
-            Mój gabinet to miejsce, gdzie komfort i profesjonalizm idą w parze. 
-            Dzięki zaawansowanym technologiom i indywidualnemu podejściu do pacjenta, dbam o zdrowy i piękny uśmiech.</p>
-        </section>
-        
-        <section class="services">
-            <h2>Nasze usługi</h2>
-            <ul>
-                <li>Stomatologia zachowawcza – kompleksowe leczenie zębów</li>
-                <li>Profilaktyka stomatologiczna – profesjonalne czyszczenie i fluoryzacja</li>
-                <li>Wybielanie zębów – nowoczesne metody wybielania</li>
-                <li>Implantologia – trwałe i estetyczne uzupełnienia</li>
-                <li>Protetyka – korony, mosty i protezy na najwyższym poziomie</li>
-                <li>Ortodoncja – aparaty stałe i ruchome dla dzieci i dorosłych</li>
-                <li>Stomatologia dziecięca – bezbolesne leczenie najmłodszych</li>
-                <li>Chirurgia stomatologiczna – ekstrakcje i inne zabiegi</li>
-            </ul>
-        </section>
-        
-        <section class="gallery">
-            <h2>Nasz gabinet</h2>
-            <img src="gab1.jpg" alt="Zdjęcie gabinetu 1">
-            <img src="gab2.jpg" alt="Zdjęcie gabinetu 2">
-            <img src="gab3.jpg" alt="Zdjęcie gabinetu 3">
-        </section>
-        
-        <section class="contact">
-            <h2>Kontakt</h2>
-            <p>📍 Adres: ul. Zdrowia 10, 50-500 Wrocław</p>
-            <p>📞 Telefon: <a href="tel:+48123456789">123 456 789</a></p>
-            <p>📧 Email: <a href="mailto:karolina@gmail.pl">karolina@gmail.pl</a></p>
-            <p>🕒 Godziny otwarcia: Pon-Pt: 9:00 - 18:00 | Sob: 9:00 - 14:00</p>
-        </section>
+    <div id="start-screen">
+      <p>Witaj w symulatorze diagnostyki i leczenia patologicznego starcia zębów. Jako dentysta, Twoim zadaniem będzie zdiagnozowanie pacjentów i zaproponowanie odpowiedniego leczenia.</p>
+      <p>Za każdą poprawną diagnozę i plan leczenia otrzymasz punkty. Twój cel to jak najlepszy wynik!</p>
+      <button class="button" id="start-button">Rozpocznij grę</button>
     </div>
+    
+    <div id="game-area" class="game-area hidden">
+      <div class="patient-info" id="patient-info">
+        <!-- Tutaj pojawi się informacja o pacjencie -->
+      </div>
+      
+      <div class="tooth-diagram" id="tooth-diagram">
+        <!-- Tutaj pojawi się obrazek zębów pacjenta -->
+        <img id="tooth-image" src="https://img.freepik.com/premium-vector/vector-illustration-human-tooth-whitening-before-after-teeth-care-concept_501057-423.jpg" alt="Diagram zębów">
+      </div>
+      
+      <div class="diagnostic-area">
+        <h3>Diagnoza:</h3>
+        <div class="options-area" id="diagnostic-options">
+          <!-- Tutaj pojawią się opcje diagnostyczne -->
+        </div>
+      </div>
+      
+      <div class="treatment-area hidden" id="treatment-area">
+        <h3>Plan leczenia:</h3>
+        <div class="options-area" id="treatment-options">
+          <!-- Tutaj pojawią się opcje leczenia -->
+        </div>
+      </div>
+      
+      <div class="feedback" id="feedback">
+        <!-- Tutaj pojawi się informacja zwrotna -->
+      </div>
+      
+      <button class="button hidden" id="confirm-diagnosis">Potwierdź diagnozę</button>
+      <button class="button hidden" id="confirm-treatment">Potwierdź plan leczenia</button>
+      <button class="button hidden" id="next-patient">Następny pacjent</button>
+    </div>
+    
+    <div class="progress-area">
+      <div class="score" id="score">Wynik: 0 pkt</div>
+      <div id="progress">Pacjent: 1/6</div>
+    </div>
+    
+    <div id="game-over" class="game-over hidden">
+      <h2>Koniec gry!</h2>
+      <p>Twój końcowy wynik: <span id="final-score">0</span> pkt</p>
+      <p id="final-feedback"></p>
+      <button class="button" id="restart-button">Zagraj ponownie</button>
+    </div>
+  </div>
+
+  <script>
+    // Dane o pacjentach
+    const patients = [
+      {
+        id: 1,
+        name: "Jan Kowalski",
+        age: 42,
+        description: "Pacjent skarży się na nadwrażliwość zębów na zimno i słodkie pokarmy. Zgłasza również zgrzytanie zębami podczas snu, potwierdzone przez partnerkę.",
+        symptoms: "Widoczne starcie brzegów siecznych zębów przednich oraz guzków zębów bocznych. Obecne płaskie, błyszczące powierzchnie na koronach zębów.",
+        diagnosis: {
+          correct: "Bruksizm nocny (starcie mechaniczne)",
+          options: [
+            "Bruksizm nocny (starcie mechaniczne)",
+            "Erozja kwasowa",
+            "Abrazja (szczotkowanie)",
+            "Atrycja fizjologiczna związana z wiekiem"
+          ]
+        },
+        treatment: {
+          correct: "Szyna relaksacyjna na noc i selektywne szlifowanie zębów",
+          options: [
+            "Szyna relaksacyjna na noc i selektywne szlifowanie zębów",
+            "Zmiana diety i stosowanie past znoszących nadwrażliwość",
+            "Odbudowa kompozytowa powierzchni żujących",
+            "Regularna fluoryzacja i obserwacja"
+          ]
+        },
+        explanation: "Pacjent cierpi na bruksizm nocny, co potwierdzają objawy zgrzytania zębami oraz charakterystyczne płaskie powierzchnie starcia. Najlepszym rozwiązaniem jest zastosowanie szyny relaksacyjnej na noc, która ochroni zęby przed dalszym starciem oraz selektywne szlifowanie w celu eliminacji przedwczesnych kontaktów."
+      },
+      {
+        id: 2,
+        name: "Anna Nowak",
+        age: 28,
+        description: "Pacjentka spożywa duże ilości napojów gazowanych i soków cytrusowych. Skarży się na postępującą nadwrażliwość zębów.",
+        symptoms: "Wklęsłe ubytki na powierzchniach podniebiennych zębów przednich. Zmiany przezroczyste na brzegach siecznych. Starcie w obszarze szyjek zębowych.",
+        diagnosis: {
+          correct: "Erozja kwasowa",
+          options: [
+            "Bruksizm nocny (starcie mechaniczne)",
+            "Erozja kwasowa",
+            "Abfrakcja",
+            "Abrazja (szczotkowanie)"
+          ]
+        },
+        treatment: {
+          correct: "Zmiana diety, płukanki neutralizujące kwasy i odbudowa kompozytowa",
+          options: [
+            "Szyna relaksacyjna na noc",
+            "Zmiana diety, płukanki neutralizujące kwasy i odbudowa kompozytowa",
+            "Korekta techniki szczotkowania zębów",
+            "Pełne korony protetyczne"
+          ]
+        },
+        explanation: "Pacjentka cierpi na erozję kwasową spowodowaną dietą bogatą w kwasy. Wklęsłe ubytki na powierzchniach podniebiennych są charakterystyczne dla erozji. Leczenie powinno obejmować modyfikację diety, stosowanie płukanek neutralizujących kwasy oraz odbudowę utraconych tkanek materiałem kompozytowym."
+      },
+      {
+        id: 3,
+        name: "Piotr Wiśniewski",
+        age: 35,
+        description: "Pacjent pracuje jako programista, często spożywa energetyki. Zgłasza suchość w ustach i problemy z koncentracją.",
+        symptoms: "Uogólnione starcie zębów, szczególnie widoczne na zębach przednich. Pacjent podczas badania zaciska i zgrzyta zębami.",
+        diagnosis: {
+          correct: "Bruksizm dzienny (związany ze stresem)",
+          options: [
+            "Bruksizm dzienny (związany ze stresem)",
+            "Atrycja fizjologiczna",
+            "Erozja kwasowa",
+            "Abrazja (szczotkowanie)"
+          ]
+        },
+        treatment: {
+          correct: "Terapia behawioralna, techniki relaksacyjne i odbudowa kompozytowa",
+          options: [
+            "Szyna relaksacyjna na noc",
+            "Terapia behawioralna, techniki relaksacyjne i odbudowa kompozytowa",
+            "Zmiana diety i stosowanie past znoszących nadwrażliwość",
+            "Pełne korony protetyczne"
+          ]
+        },
+        explanation: "Pacjent cierpi na bruksizm dzienny związany ze stresem zawodowym. Świadczy o tym mimowolne zaciskanie zębów podczas badania. Leczenie powinno obejmować terapię behawioralną i techniki relaksacyjne, które adresują przyczynę problemu, oraz odbudowę kompozytową zniszczonych tkanek zęba."
+      },
+      {
+        id: 4,
+        name: "Maria Kamińska",
+        age: 52,
+        description: "Pacjentka uskarża się na nieprzyjemne uczucie palenia w przełyku, szczególnie po posiłkach i w pozycji leżącej.",
+        symptoms: "Erozje na powierzchniach podniebiennych i żujących zębów. Zmniejszona wysokość koron klinicznych zębów trzonowych.",
+        diagnosis: {
+          correct: "Erozja związana z refluksem żołądkowo-przełykowym (GERD)",
+          options: [
+            "Bruksizm nocny (starcie mechaniczne)",
+            "Erozja związana z refluksem żołądkowo-przełykowym (GERD)",
+            "Abrazja związana z nieprawidłową techniką szczotkowania",
+            "Atrycja fizjologiczna związana z wiekiem"
+          ]
+        },
+        treatment: {
+          correct: "Konsultacja gastrologiczna, leki zobojętniające i odbudowa protetyczna",
+          options: [
+            "Szyna relaksacyjna na noc",
+            "Zmiana diety i techniki szczotkowania",
+            "Konsultacja gastrologiczna, leki zobojętniające i odbudowa protetyczna",
+            "Odbudowa kompozytowa i fluoryzacja"
+          ]
+        },
+        explanation: "Pacjentka cierpi na erozję związaną z refluksem żołądkowo-przełykowym, na co wskazują objawy pieczenia w przełyku oraz charakterystyczny wzorzec erozji. Leczenie powinno obejmować konsultację gastrologiczną w celu leczenia przyczyny refluksu, stosowanie leków zobojętniających kwasy żołądkowe oraz odbudowę protetyczną zniszczonych tkanek zęba."
+      },
+      {
+        id: 5,
+        name: "Tomasz Lewandowski",
+        age: 45,
+        description: "Pacjent jest sportowcem trenującym triathlon. Spożywa duże ilości napojów izotonicznych i energetycznych.",
+        symptoms: "Starcie powierzchni żujących zębów trzonowych. Widoczne wklęsłe ubytki w obrębie szyjek zębowych.",
+        diagnosis: {
+          correct: "Starcie wieloczynnikowe (erozja kwasowa + bruksizm)",
+          options: [
+            "Bruksizm nocny (starcie mechaniczne)",
+            "Erozja kwasowa",
+            "Starcie wieloczynnikowe (erozja kwasowa + bruksizm)",
+            "Abrazja związana z nieprawidłową techniką szczotkowania"
+          ]
+        },
+        treatment: {
+          correct: "Modyfikacja diety, szyna ochronna i odbudowa kompozytowa",
+          options: [
+            "Szyna relaksacyjna na noc",
+            "Zmiana diety i stosowanie past znoszących nadwrażliwość",
+            "Modyfikacja diety, szyna ochronna i odbudowa kompozytowa",
+            "Pełne korony protetyczne"
+          ]
+        },
+        explanation: "Pacjent cierpi na starcie wieloczynnikowe, będące kombinacją erozji kwasowej (spowodowanej napojami izotonicznymi i energetycznymi) oraz bruksizmu (częstego u sportowców podczas intensywnego wysiłku). Leczenie powinno adresować obie przyczyny, poprzez modyfikację diety, zastosowanie szyny ochronnej oraz odbudowę utraconych tkanek zęba materiałem kompozytowym."
+      },
+      {
+        id: 6,
+        name: "Karolina Dąbrowska",
+        age: 63,
+        description: "Pacjentka przyjmuje leki na nadciśnienie, które powodują suchość jamy ustnej. Zgłasza problemy z żuciem twardych pokarmów.",
+        symptoms: "Zaawansowane starcie zębów ze znaczną utratą wysokości zwarcia. Widoczne odsłonięte zębiny na powierzchniach żujących.",
+        diagnosis: {
+          correct: "Zaawansowane starcie związane z hiposaliwacją",
+          options: [
+            "Bruksizm nocny (starcie mechaniczne)",
+            "Erozja kwasowa",
+            "Zaawansowane starcie związane z hiposaliwacją",
+            "Atrycja fizjologiczna związana z wiekiem"
+          ]
+        },
+        treatment: {
+          correct: "Kompleksowa rehabilitacja protetyczna i substytuty śliny",
+          options: [
+            "Szyna relaksacyjna na noc",
+            "Zmiana diety i stosowanie past znoszących nadwrażliwość",
+            "Odbudowa kompozytowa powierzchni żujących",
+            "Kompleksowa rehabilitacja protetyczna i substytuty śliny"
+          ]
+        },
+        explanation: "Pacjentka cierpi na zaawansowane starcie zębów związane z hiposaliwacją (zmniejszonym wydzielaniem śliny), co jest efektem ubocznym leków na nadciśnienie. Brak odpowiedniej ilości śliny prowadzi do przyspieszonego starcia zębów. Ze względu na zaawansowany stan, najlepszym rozwiązaniem jest kompleksowa rehabilitacja protetyczna oraz stosowanie substytutów śliny."
+      }
+    ];
+
+    // Zmienne globalne
+    let currentPatientIndex = 0;
+    let score = 0;
+    let selectedDiagnosis = null;
+    let selectedTreatment = null;
+    let diagnosisCorrect = false;
+    
+    // Elementy DOM
+    const startScreen = document.getElementById("start-screen");
+    const gameArea = document.getElementById("game-area");
+    const patientInfo = document.getElementById("patient-info");
+    const diagnosticOptions = document.getElementById("diagnostic-options");
+    const treatmentArea = document.getElementById("treatment-area");
+    const treatmentOptions = document.getElementById("treatment-options");
+    const feedback = document.getElementById("feedback");
+    const confirmDiagnosisBtn = document.getElementById("confirm-diagnosis");
+    const confirmTreatmentBtn = document.getElementById("confirm-treatment");
+    const nextPatientBtn = document.getElementById("next-patient");
+    const scoreDisplay = document.getElementById("score");
+    const progressDisplay = document.getElementById("progress");
+    const gameOver = document.getElementById("game-over");
+    const finalScore = document.getElementById("final-score");
+    const finalFeedback = document.getElementById("final-feedback");
+    const restartButton = document.getElementById("restart-button");
+    const startButton = document.getElementById("start-button");
+    const toothImage = document.getElementById("tooth-image");
+    
+    // Funkcja do rozpoczęcia gry
+    function startGame() {
+      startScreen.classList.add("hidden");
+      gameArea.classList.remove("hidden");
+      score = 0;
+      currentPatientIndex = 0;
+      updateScore();
+      loadPatient(currentPatientIndex);
+    }
+    
+    // Funkcja do ładowania informacji o pacjencie
+    function loadPatient(index) {
+      if (index >= patients.length) {
+        endGame();
+        return;
+      }
+      
+      const patient = patients[index];
+      
+      // Resetowanie wcześniejszych wyborów
+      selectedDiagnosis = null;
+      selectedTreatment = null;
+      diagnosisCorrect = false;
+      
+      // Aktualizacja informacji o pacjencie
+      patientInfo.innerHTML = `
+        <h3>Pacjent: ${patient.name}, ${patient.age} lat</h3>
+        <p><strong>Historia:</strong> ${patient.description}</p>
+        <p><strong>Badanie kliniczne:</strong> ${patient.symptoms}</p>
+      `;
+      
+      // Ładowanie opcji diagnostycznych
+      diagnosticOptions.innerHTML = "";
+      patient.diagnosis.options.forEach(option => {
+        const optionEl = document.createElement("div");
+        optionEl.className = "option";
+        optionEl.textContent = option;
+        optionEl.addEventListener("click", () => selectDiagnosis(option, optionEl));
+        diagnosticOptions.appendChild(optionEl);
+      });
+      
+      // Ukrywanie opcji leczenia i przycisków
+      treatmentArea.classList.add("hidden");
+      confirmTreatmentBtn.classList.add("hidden");
+      nextPatientBtn.classList.add("hidden");
+      
+      // Pokazywanie przycisku potwierdzenia diagnozy
+      confirmDiagnosisBtn.classList.remove("hidden");
+      
+      // Ukrywanie feedbacku
+      feedback.style.display = "none";
+      
+      // Aktualizacja postępu
+      progressDisplay.textContent = `Pacjent: ${index + 1}/${patients.length}`;
+      
+      // Symulacja różnych obrazów zębów dla każdego pacjenta
+      // W prawdziwej aplikacji byłyby to różne obrazy
+      const imageIndex = (index % 3) + 1;
+      switchToothImage(imageIndex);
+    }
+    
+    // Funkcja do zmiany obrazu zębów
+    function switchToothImage(index) {
+      const imageUrls = [
+        "https://img.freepik.com/premium-vector/vector-illustration-human-tooth-whitening-before-after-teeth-care-concept_501057-423.jpg",
+        "https://media.istockphoto.com/id/1300036753/vector/dental-problems-flat-vector-illustration.jpg?s=612x612&w=0&k=20&c=4GFoSyzIwJSz8sGFk22qVNdHAM7jQwcmESxSKn_6FNI=",
+        "https://media.istockphoto.com/id/1270451049/photo/toothache-woman-feeling-tooth-pain-closeup-of-unhappy-girl-suffering-from-strong-tooth-pain.jpg?s=612x612&w=0&k=20&c=sFDNvxUzO4M80ISyecUkRIVHHxfGZnUU2P-7Sza-QFI="
+      ];
+      
+      toothImage.src = imageUrls[index - 1];
+    }
+    
+    // Funkcja do wyboru diagnozy
+    function selectDiagnosis(diagnosis, element) {
+      // Usunięcie poprzedniego wyboru
+      const options = diagnosticOptions.querySelectorAll(".option");
+      options.forEach(opt => opt.classList.remove("selected"));
+      
+      // Zaznaczenie nowego wyboru
+      element.classList.add("selected");
+      selectedDiagnosis = diagnosis;
+    }
+    
+    // Funkcja do potwierdzenia diagnozy
+    function confirmDiagnosis() {
+      if (!selectedDiagnosis) {
+        alert("Wybierz diagnozę przed kontynuacją!");
+        return;
+      }
+      
+      const patient = patients[currentPatientIndex];
+      diagnosisCorrect = selectedDiagnosis === patient.diagnosis.correct;
+      
+      // Pokaż feedback o diagnozie
+      feedback.style.display = "block";
+      if (diagnosisCorrect) {
+        feedback.className = "feedback correct";
+        feedback.innerHTML = `<p><strong>Prawidłowa diagnoza!</strong> +10 punktów</p>`;
+        score += 10;
+        updateScore();
+      } else {
+        feedback.className = "feedback incorrect";
+        feedback.innerHTML = `
+          <p><strong>Nieprawidłowa diagnoza.</strong> Prawidłowa diagnoza to: ${patient.diagnosis.correct}</p>
+        `;
+      }
+      
+      // Ukryj przycisk potwierdzenia diagnozy
+      confirmDiagnosisBtn.classList.add("hidden");
+      
+      // Pokaż opcje leczenia
+      treatmentArea.classList.remove("hidden");
+      treatmentOptions.innerHTML = "";
+      patient.treatment.options.forEach(option => {
+        const optionEl = document.createElement("div");
+        optionEl.className = "option";
+        optionEl.textContent = option;
+        optionEl.addEventListener("click", () => selectTreatment(option, optionEl));
+        treatmentOptions.appendChild(optionEl);
+      });
+      
+      // Pokaż przycisk potwierdzenia leczenia
+      confirmTreatmentBtn.classList.remove("hidden");
+    }
+    
+    // Funkcja do wyboru leczenia
+    function selectTreatment(treatment, element) {
+      // Usunięcie poprzedniego wyboru
+      const options = treatmentOptions.querySelectorAll(".option");
+      options.forEach(opt => opt.classList.remove("selected"));
+      
+      // Zaznaczenie nowego wyboru
+      element.classList.add("selected");
+      selectedTreatment = treatment;
+    }
+    
+    // Funkcja do potwierdzenia planu leczenia
+    function confirmTreatment() {
+      if (!selectedTreatment) {
+        alert("Wybierz plan leczenia przed kontynuacją!");
+        return;
+      }
+      
+      const patient = patients[currentPatientIndex];
+      const treatmentCorrect = selectedTreatment === patient.treatment.correct;
+      
+      // Aktualizacja feedbacku
+      feedback.style.display = "block";
+      if (treatmentCorrect) {
+        feedback.className = "feedback correct";
+        feedback.innerHTML += `<p><strong>Prawidłowy plan leczenia!</strong> +15 punktów</p>
+        <p><strong>Wyjaśnienie:</strong> ${patient.explanation}</p>`;
+        score += 15;
+        updateScore();
+      } else {
+        feedback.className = "feedback incorrect";
+        feedback.innerHTML += `
+          <p><strong>Nieprawidłowy plan leczenia.</strong> Prawidłowy plan leczenia to: ${patient.treatment.correct}</p>
+          <p><strong>Wyjaśnienie:</strong> ${patient.explanation}</p>
+        `;
+      }
+      
+      // Ukryj przycisk potwierdzenia leczenia
+      confirmTreatmentBtn.classList.add("hidden");
+      
+      // Pokaż przycisk do przejścia do następnego pacjenta
+      nextPatientBtn.classList.remove("hidden");
+    }
+    
+    // Funkcja do aktualizacji wyniku
+    function updateScore() {
+      scoreDisplay.textContent = `Wynik: ${score} pkt`;
+    }
+    
+    // Funkcja do przejścia do następnego pacjenta
+    function nextPatient() {
+      currentPatientIndex++;
+      loadPatient(currentPatientIndex);
+    }
+    
+    // Funkcja kończąca grę
+    function endGame() {
+      gameArea.classList.add("hidden");
+      gameOver.classList.remove("hidden");
+      finalScore.textContent = score;
+      
+      // Feedback na podstawie wyniku
+      let maxPossibleScore = patients.length * 25; // 10 za diagnozę + 15 za leczenie
+      let percentage = (score / maxPossibleScore) * 100;
+      
+      if (percentage >= 90) {
+        finalFeedback.textContent = "Znakomity wynik! Jesteś ekspertem w dziedzinie patologicznego starcia zębów!";
+      } else if (percentage >= 70) {
+        finalFeedback.textContent = "Dobry wynik! Masz solidną wiedzę na temat patologicznego starcia zębów.";
+      } else if (percentage >= 50) {
+        finalFeedback.textContent = "Przyzwoity wynik, ale jest jeszcze miejsce na poprawę. Spróbuj ponownie!";
+      } else {
+        finalFeedback.textContent = "Wygląda na to, że potrzebujesz więcej praktyki w diagnostyce i leczeniu patologicznego starcia zębów. Spróbuj ponownie!";
+      }
+    }
+    
+    // Funkcja do restartu gry
+    function restartGame() {
+      gameOver.classList.add("hidden");
+      startGame();
+    }
+    
+    // Podpięcie funkcji do przycisków
+    startButton.addEventListener("click", startGame);
+    confirmDiagnosisBtn.addEventListener("click", confirmDiagnosis);
+    confirmTreatmentBtn.addEventListener("click", confirmTreatment);
+    nextPatientBtn.addEventListener("click", nextPatient);
+    restartButton.addEventListener("click", restartGame);
+  </script>
 </body>
 </html>

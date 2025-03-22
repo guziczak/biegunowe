@@ -2,102 +2,201 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Gra: Patologiczne Starcie Zębów - Diagnoza i Leczenie</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       background-color: #f0f8ff;
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      color: #333;
+      touch-action: manipulation;
     }
     
     .container {
-      max-width: 800px;
+      max-width: 100%;
       margin: 0 auto;
       background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      overflow-x: hidden;
+    }
+    
+    @media (min-width: 768px) {
+      .container {
+        max-width: 800px;
+        padding: 2rem;
+        margin: 1rem auto;
+      }
     }
     
     h1, h2 {
       color: #2a6496;
       text-align: center;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    h1 {
+      font-size: 1.5rem;
+    }
+    
+    h2 {
+      font-size: 1.3rem;
+    }
+    
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
     }
     
     .game-area {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 1rem;
+      width: 100%;
     }
     
     .patient-info {
       border: 1px solid #ddd;
-      padding: 15px;
-      border-radius: 5px;
+      padding: 1rem;
+      border-radius: 8px;
       background-color: #f9f9f9;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    
+    .patient-info h3 {
+      margin-top: 0;
+      color: #2a6496;
+      font-size: 1.1rem;
     }
     
     .tooth-diagram {
       display: flex;
       justify-content: center;
-      margin: 20px 0;
+      margin: 1rem 0;
+      width: 100%;
     }
     
     .tooth-diagram img {
       max-width: 100%;
       height: auto;
+      border-radius: 8px;
       border: 1px solid #ddd;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
     }
     
     .options-area {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 0.8rem;
+    }
+    
+    .diagnostic-area h3, .treatment-area h3 {
+      margin-bottom: 0.8rem;
+      color: #2a6496;
+      font-size: 1.1rem;
     }
     
     .option {
-      padding: 10px;
+      padding: 1rem;
       background-color: #e6f2ff;
       border: 1px solid #b3d9ff;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      position: relative;
+      min-height: 2.5rem;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
     
-    .option:hover {
-      background-color: #cce6ff;
+    .option:active {
+      background-color: #b3d9ff;
+      transform: translateY(1px);
+    }
+    
+    @media (hover: hover) {
+      .option:hover {
+        background-color: #cce6ff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
     }
     
     .selected {
       background-color: #b3d9ff;
       font-weight: bold;
+      box-shadow: 0 0 0 2px #4d94ff;
     }
     
     .button {
       display: block;
-      width: 200px;
-      margin: 20px auto;
-      padding: 10px;
+      width: 100%;
+      max-width: 280px;
+      margin: 1.5rem auto;
+      padding: 0.9rem 1rem;
       background-color: #4d94ff;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       text-align: center;
-      font-size: 16px;
+      font-size: 1rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      -webkit-tap-highlight-color: transparent;
     }
     
-    .button:hover {
+    .button:active {
       background-color: #3385ff;
+      transform: translateY(2px);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+    
+    @media (hover: hover) {
+      .button:hover {
+        background-color: #3385ff;
+        box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .button {
+        font-size: 1.1rem;
+      }
     }
     
     .feedback {
-      padding: 15px;
-      margin-top: 15px;
-      border-radius: 5px;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 8px;
       display: none;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      animation: fadeIn 0.4s ease-in-out;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .feedback strong {
+      font-weight: 600;
     }
     
     .correct {
@@ -113,27 +212,124 @@
     }
     
     .progress-area {
-      margin-top: 20px;
+      margin-top: 1.5rem;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
     }
     
     .score {
-      font-size: 18px;
+      font-size: 1.1rem;
       font-weight: bold;
+      color: #2a6496;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      max-width: 280px;
+      height: 8px;
+      background-color: #e6e6e6;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background-color: #4d94ff;
+      transition: width 0.3s ease;
     }
     
     .hidden {
-      display: none;
+      display: none !important;
     }
     
     .game-over {
       text-align: center;
-      padding: 20px;
+      padding: 1.5rem 1rem;
+      animation: fadeIn 0.5s ease-in-out;
     }
     
     .highlights {
       color: #2a6496;
       font-weight: bold;
+    }
+    
+    .results-summary {
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      text-align: left;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .results-summary h3 {
+      margin-top: 0;
+      color: #2a6496;
+    }
+    
+    .results-item {
+      margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .results-label {
+      font-weight: 600;
+    }
+    
+    .loading {
+      position: relative;
+    }
+    
+    .loading:after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(77, 148, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #4d94ff;
+      animation: spin 1s infinite linear;
+      right: 10px;
+      top: calc(50% - 10px);
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    @media (max-width: 480px) {
+      .patient-info, .option, .feedback {
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* Animacje przejścia między ekranami */
+    .fade-enter {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    
+    .fade-enter-active {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    
+    .vibrate {
+      animation: vibrate 0.3s linear;
+    }
+    
+    @keyframes vibrate {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-2px); }
+      40% { transform: translateX(2px); }
+      60% { transform: translateX(-2px); }
+      80% { transform: translateX(2px); }
     }
   </style>
 </head>
@@ -183,18 +379,45 @@
     
     <div class="progress-area">
       <div class="score" id="score">Wynik: 0 pkt</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+      </div>
       <div id="progress">Pacjent: 1/6</div>
     </div>
     
     <div id="game-over" class="game-over hidden">
       <h2>Koniec gry!</h2>
       <p>Twój końcowy wynik: <span id="final-score">0</span> pkt</p>
+      <div class="results-summary" id="results-summary">
+        <!-- Tutaj pojawią się szczegółowe wyniki -->
+      </div>
       <p id="final-feedback"></p>
       <button class="button" id="restart-button">Zagraj ponownie</button>
+      <button class="button" id="share-button" style="background-color: #25D366;">Udostępnij wyniki</button>
     </div>
   </div>
 
   <script>
+    // Funkcja do wykrywania urządzeń mobilnych
+    function isMobileDevice() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    }
+    
+    // Dostosowania dla urządzeń mobilnych
+    if (isMobileDevice()) {
+      document.addEventListener('DOMContentLoaded', function() {
+        // Dostosowanie interakcji dotykowych
+        document.querySelectorAll('.option').forEach(option => {
+          option.addEventListener('touchstart', function() {
+            this.style.backgroundColor = '#b3d9ff';
+          });
+          option.addEventListener('touchend', function() {
+            this.style.backgroundColor = '';
+          });
+        });
+      });
+    }
+    
     // Dane o pacjentach
     const patients = [
       {
@@ -361,6 +584,9 @@
     let selectedDiagnosis = null;
     let selectedTreatment = null;
     let diagnosisCorrect = false;
+    let patientResults = [];
+    let isAnimating = false;
+    let vibrationSupported = 'vibrate' in navigator;
     
     // Elementy DOM
     const startScreen = document.getElementById("start-screen");
@@ -375,12 +601,15 @@
     const nextPatientBtn = document.getElementById("next-patient");
     const scoreDisplay = document.getElementById("score");
     const progressDisplay = document.getElementById("progress");
+    const progressFill = document.getElementById("progress-fill");
     const gameOver = document.getElementById("game-over");
     const finalScore = document.getElementById("final-score");
     const finalFeedback = document.getElementById("final-feedback");
     const restartButton = document.getElementById("restart-button");
     const startButton = document.getElementById("start-button");
     const toothImage = document.getElementById("tooth-image");
+    const shareButton = document.getElementById("share-button");
+    const resultsSummary = document.getElementById("results-summary");
     
     // Funkcja do rozpoczęcia gry
     function startGame() {
